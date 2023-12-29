@@ -8,6 +8,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController searchController = TextEditingController();
+  List<String> navBarItem = ["Top News", "India", "World", "Finance", "Health"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,24 +24,30 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child:  const Row(
+                color: Colors.black12, borderRadius: BorderRadius.circular(10)),
+            child: const Row(
               children: [
-                Icon(Icons.search,
+                Icon(
+                  Icons.search,
                   color: Colors.blue,
                 ),
-                Expanded(child: TextField(
+                Expanded(
+                    child: TextField(
                   textInputAction: TextInputAction.search,
-                  onSubmitted: (){},
+                  onSubmitted: () {},
                   decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search Health"
-                  ),
+                      border: InputBorder.none, hintText: "Search Health"),
                 ))
               ],
             ),
+          ),
+          Container(
+            child: ListView.builder(
+                itemCount: navBarItem.length, itemBuilder: (context, index) {
+                  return Container(
+                    child: ,
+                  );
+            }),
           )
         ],
       ),
