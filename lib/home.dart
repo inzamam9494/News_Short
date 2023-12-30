@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
                 Expanded(
                     child: TextField(
                   textInputAction: TextInputAction.search,
-                  onSubmitted: () {},
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: "Search Health"),
                 ))
@@ -42,12 +41,34 @@ class _HomeState extends State<Home> {
             ),
           ),
           Container(
+            height: 50,
             child: ListView.builder(
-                itemCount: navBarItem.length, itemBuilder: (context, index) {
-                  return Container(
-                    child: ,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: navBarItem.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: (){
+                      print(navBarItem[index]);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Center(
+                        child: Text(navBarItem[index],
+                        style: const TextStyle(
+                          fontSize: 19,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),),
+                      ),
+                    ),
                   );
-            }),
+                }),
           )
         ],
       ),
