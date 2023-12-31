@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Container(
-            height: 50,
+            height: 60,
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
