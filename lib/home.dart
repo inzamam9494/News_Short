@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -33,10 +34,10 @@ class _HomeState extends State<Home> {
                 ),
                 Expanded(
                     child: TextField(
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                      border: InputBorder.none, hintText: "Search Health"),
-                ))
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                          border: InputBorder.none, hintText: "Search Health"),
+                    ))
               ],
             ),
           ),
@@ -48,30 +49,56 @@ class _HomeState extends State<Home> {
                 itemCount: navBarItem.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
+                    onTap: () {
                       print(navBarItem[index]);
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       margin: const EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(15)
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(15)
                       ),
                       child: Center(
                         child: Text(navBarItem[index],
-                        style: const TextStyle(
-                          fontSize: 19,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold
-                        ),),
+                          style: const TextStyle(
+                              fontSize: 19,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),),
                       ),
                     ),
                   );
                 }),
           )
+
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 200,
+            ),
+            items: items.map((item) {
+            return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: item
+                      )
+                  );
+                }
+            );
+          }).toList(),
+          ).toList()
         ],
       ),
     );
   }
+
+  final List items = [
+    Colors.black,
+    Colors.blue,
+    Colors.amber,
+    Colors.purpleAccent,
+    Colors.deepOrange
+  ];
 }
