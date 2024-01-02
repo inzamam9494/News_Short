@@ -34,10 +34,10 @@ class _HomeState extends State<Home> {
                 ),
                 Expanded(
                     child: TextField(
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "Search Health"),
-                    ))
+                  textInputAction: TextInputAction.search,
+                  decoration: InputDecoration(
+                      border: InputBorder.none, hintText: "Search Health"),
+                ))
               ],
             ),
           ),
@@ -58,47 +58,44 @@ class _HomeState extends State<Home> {
                       margin: const EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(15)
-                      ),
+                          borderRadius: BorderRadius.circular(15)),
                       child: Center(
-                        child: Text(navBarItem[index],
+                        child: Text(
+                          navBarItem[index],
                           style: const TextStyle(
                               fontSize: 19,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold
-                          ),),
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   );
                 }),
-          )
-
+          ),
           CarouselSlider(
-            options: CarouselOptions(
-              height: 200,
-            ),
-            items: items.map((item) {
-            return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      decoration: BoxDecoration(
-                          color: item
-                      )
+              items: items.map((item) {
+                return Builder(builder: (BuildContext context) {
+                  return InkWell(
+                    onTap: (){},
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                      decoration: BoxDecoration(color: item),
+                    ),
                   );
-                }
-            );
-          }).toList(),
-          ).toList()
+                });
+              }).toList(),
+              options: CarouselOptions(
+                  height: 200, autoPlay: true, enableInfiniteScroll: false))
         ],
       ),
     );
   }
-
-  final List items = [
-    Colors.black,
-    Colors.blue,
-    Colors.amber,
-    Colors.purpleAccent,
-    Colors.deepOrange
-  ];
 }
+
+final List items = [
+  Colors.black,
+  Colors.blue,
+  Colors.amber,
+  Colors.purpleAccent,
+  Colors.deepOrange
+];
