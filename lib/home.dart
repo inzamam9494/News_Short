@@ -85,7 +85,15 @@ class _HomeState extends State<Home> {
                 });
               }).toList(),
               options: CarouselOptions(
-                  height: 200, autoPlay: true, enableInfiniteScroll: false))
+                  height: 200, autoPlay: true, enableInfiniteScroll: false)),
+          Container(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+                itemBuilder: (context, index){
+                Container(child: Image.network("src"),)
+                }),
+          )
         ],
       ),
     );
