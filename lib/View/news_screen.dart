@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_short/View/ReusableWidgets/category_list.dart';
+import 'package:news_short/View/ReusableWidgets/detail_screen_icons.dart';
 import 'package:news_short/View/ReusableWidgets/menu_bar.dart';
+import 'package:news_short/View/ReusableWidgets/news_card.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -30,6 +32,7 @@ class _NewsScreenState extends State<NewsScreen> {
             SlideShow(),
             const CategoryList(),
             ReusableText(text: 'For You'),
+            const NewsCard(),
           ],
         ),
       ),
