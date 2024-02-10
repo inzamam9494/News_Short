@@ -32,7 +32,8 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
           ]),
               SizedBox(height: 10,),
               NewsSource(),
-              const Text(text)
+              const Text(text
+              )
         ]),
       ),
     );
