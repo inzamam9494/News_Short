@@ -1,21 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_short/View/CustomIcon/menu_icon.dart';
+import 'package:news_short/View/CustomIcon/search_icon.dart';
+
+import '../CustomIcon/bell_icon.dart';
 
 class MenuBarWidget extends StatelessWidget {
-  const MenuBarWidget({super.key});
+  final GestureTapCallback onTapMenu;
+  final GestureTapCallback onTapSearch;
+  final GestureTapCallback onTapBell;
+   MenuBarWidget({super.key,
+    required this.onTapMenu,
+    required this.onTapSearch,
+    required this.onTapBell,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(15),
+    return Padding(
+      padding: EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.menu),
+          MenuIcon(onTap: onTapMenu),
           Row(
-            children: [Icon(Icons.search),
-              SizedBox(width: 10),
-              Icon(Icons.notifications_none)],
+            children: [
+              SearchIcon(onTap: onTapSearch),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+              BellIcon(onTap: onTapBell)
+            ],
           )
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_short/View/ReusableWidgets/slide_show.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key});
@@ -38,7 +39,7 @@ class ListIcon extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.grey, borderRadius: BorderRadius.circular(20)),
+            color: newsIconColor, borderRadius: BorderRadius.circular(20)),
         child:  Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: Text(

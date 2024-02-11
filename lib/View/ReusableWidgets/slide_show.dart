@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:news_short/Model/model.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+const newsIconColor = Color(0xffc1c1cf);
 
 class SlideShow extends StatefulWidget {
   SlideShow({super.key});
@@ -16,23 +19,17 @@ class _SlideShowState extends State<SlideShow> {
 
   StateService stateService = StateService();
 
-  final List colorList = [
-    const Color(0xff05be54),
-    const Color(0xffbeb505),
-    const Color(0xff6b05be),
-    const Color(0xffe7c2ee),
-    const Color(0xff23b3e1),
-  ];
-
   final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FutureBuilder(
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          FutureBuilder(
             future: stateService.fetchNewsArticles(),
-            builder: (context, AsyncSnapshot<NewsQueryModel>snapshot) {
+            builder: (context, AsyncSnapshot<NewsQueryModel> snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading..');
               } else {
@@ -40,29 +37,82 @@ class _SlideShowState extends State<SlideShow> {
                     itemCount: 5,
                     itemBuilder: (context, index, realIndex) {
                       return Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    snapshot.data!.articles![index].urlToImage.toString()),
-                              fit: BoxFit.cover
-                            )),
+                        child: Card(
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image.network(
+                                  snapshot.data!.articles![index].urlToImage
+                                      .toString(),
+                                  fit: BoxFit.fill,
+                                  height: double.infinity,
+                                ),
+                              ),
+                              Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                        gradient: LinearGradient(
+                                            begin:
+                                                AlignmentDirectional.topCenter,
+                                            end: AlignmentDirectional
+                                                .bottomCenter,
+                                            colors: [
+                                          Colors.black12.withOpacity(0),
+                                          Colors.black.withOpacity(1)
+                                        ])),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Column(
+                                          children: [
+                                        Row(
+                                           mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                          Text(
+                                            snapshot.data!.articles![index]
+                                                .source!.name
+                                                .toString(),
+                                            style: const TextStyle(color: Colors.white,
+                                            fontSize: 12),
+                                          ),
+                                        ]),
+                                        Text(
+                                          snapshot.data!.articles![index].title
+                                              .toString(),
+                                          style: const TextStyle(color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                        ),
+                                      ]),
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        ),
                       );
                     },
                     options: CarouselOptions(
                         autoPlay: true,
                         height: 200,
+                        enlargeCenterPage: true,
                         onPageChanged: (index, reason) =>
                             setState(() => activeIndex = index)));
               }
-            },) ,
-        const SizedBox(height: 20),
-        AnimatedSmoothIndicator(
-          effect: const ExpandingDotsEffect(
-              dotWidth: 8, dotHeight: 8, activeDotColor: Color(0xff020e15)),
-          activeIndex: activeIndex,
-          count: colorList.length,
-        )
-      ],
+            },
+          ),
+          const SizedBox(height: 20),
+          AnimatedSmoothIndicator(
+            effect: const ExpandingDotsEffect(
+                dotWidth: 8, dotHeight: 8, activeDotColor: Color(0xff020e15)),
+            activeIndex: activeIndex,
+            count: 5,
+          )
+        ],
+      ),
     );
   }
 }
