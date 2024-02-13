@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_short/View/CustomIcon/menu_icon.dart';
-import 'package:news_short/View/CustomIcon/search_icon.dart';
 import 'package:news_short/View/ReusableWidgets/category_list.dart';
-import 'package:news_short/View/ReusableWidgets/detail_screen_icons.dart';
 import 'package:news_short/View/ReusableWidgets/menu_bar.dart';
-import 'package:news_short/View/ReusableWidgets/news_card.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -16,7 +12,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
 
-  String categoryName = 'technology';
+  String categoryName = 'general';
 
   List<String> categoryList = [
     'general',
@@ -33,7 +29,15 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-      // drawer: const Drawer(),
+      drawer: const Drawer(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled, color: Colors.black,), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmarks_rounded, color: Colors.black), label: 'Mark'),
+          BottomNavigationBarItem(icon: Icon(Icons.network_check, color: Colors.black), label: 'Explore'),
+          BottomNavigationBarItem(icon: Icon(Icons.person, color: Colors.black), label: 'Profile'),
+        ],
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: ScrollPhysics(),
@@ -50,7 +54,6 @@ class _NewsScreenState extends State<NewsScreen> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ReusableText(text: 'Breaking News'),
             SlideShow(),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             CategoryList()
           ],
         ),

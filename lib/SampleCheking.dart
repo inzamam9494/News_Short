@@ -4,7 +4,6 @@ import 'package:news_short/Services/utilities/state_services.dart';
 
 import 'View/ReusableWidgets/category_list.dart';
 import 'View/ReusableWidgets/menu_bar.dart';
-import 'View/ReusableWidgets/news_card.dart';
 import 'View/ReusableWidgets/slide_show.dart';
 
 class SampleChecking extends StatefulWidget {
@@ -94,7 +93,6 @@ class Reusablecode extends StatelessWidget {
             SlideShow(),
             const CategoryList(),
             ReusableText(text: 'For You'),
-            const NewsCard(),
             // SizedBox(
             //   height: MediaQuery.of(context).size.height * 0.10,
             //   child: Column(
