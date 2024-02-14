@@ -67,6 +67,9 @@ flutter:
   - images/icons/alarm.png
   - images/icons/menu.png
   - images/icons/search.png
+  - images/icons/back.png
+  - images/icons/bookmark.png
+  - images/icons/share.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

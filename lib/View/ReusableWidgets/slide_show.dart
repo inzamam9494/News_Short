@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/Model/model.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
+import 'package:news_short/View/news_detail_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 const newsIconColor = Color(0xffc1c1cf);

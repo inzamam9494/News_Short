@@ -4,6 +4,7 @@ import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
 
 import '../../Model/news_category.dart';
+import '../news_detail_screen.dart';
 
 class CategoryList extends StatefulWidget {
    const CategoryList({super.key});
@@ -79,41 +80,48 @@ class _CategoryListState extends State<CategoryList> {
                     shrinkWrap: true,
                       itemCount: snapshot.data!.articles!.length,
                       itemBuilder: (context, index){
-                        return Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10),
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(snapshot.data!.articles![index].urlToImage.toString())
-                                )
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Column(
-                                  children: [
-                                    Text(snapshot.data!.articles![index].title.toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15
-                                    ),),
-                                    Row(
-                                      children: [
-                                        Text(snapshot.data!.articles![index].source!.name.toString()),
-                                        const Text(' Feb, 28 2023')
-                                      ],
-                                    )
-                                  ],
+                        return InkWell(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+                            title: snapshot.data!.articles![index].title.toString(),
+                            name: snapshot.data!.articles![index].source!.name.toString(),
+                            urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
+                            content: snapshot.data!.articles![index].content.toString()))),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(10),
+                                height: MediaQuery.of(context).size.height * 0.08,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(snapshot.data!.articles![index].urlToImage.toString())
+                                  )
                                 ),
                               ),
-                            )
-                          ],
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Column(
+                                    children: [
+                                      Text(snapshot.data!.articles![index].title.toString(),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15
+                                      ),),
+                                      Row(
+                                        children: [
+                                          Text(snapshot.data!.articles![index].source!.name.toString()),
+                                          const Text(' Feb, 28 2023')
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         );
                       });
                 }

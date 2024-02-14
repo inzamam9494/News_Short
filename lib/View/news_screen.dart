@@ -40,7 +40,7 @@ class _NewsScreenState extends State<NewsScreen> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
