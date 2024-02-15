@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_short/View/bottom_bar.dart';
 import 'package:news_short/View/news_screen.dart';
 
 const source = "https://source.unsplash.com/random";
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: MediaQuery.of(context).size.height * .07),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const NewsScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
                 },
                 child: Container(
                   decoration: BoxDecoration(

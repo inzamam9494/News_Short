@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:news_short/View/CustomIcon/explore_icon.dart';
+import 'package:news_short/View/CustomIcon/home_icon.dart';
+import 'package:news_short/View/CustomIcon/profile_icon.dart';
+import 'package:news_short/View/CustomIcon/save_icon.dart';
 import 'package:news_short/View/ReusableWidgets/category_list.dart';
 import 'package:news_short/View/ReusableWidgets/menu_bar.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
+import 'package:news_short/View/bookmark_screen.dart';
+import 'package:news_short/View/explore_screen.dart';
+import 'package:news_short/View/profile_screen.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
@@ -11,7 +18,6 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-
 
   String categoryName = 'general';
 
@@ -31,16 +37,6 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
       key: _globalKey,
       drawer: const Drawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.black,
-        unselectedLabelStyle: const TextStyle(color: Colors.black),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled, color: Colors.black,), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.bookmarks_rounded, color: Colors.black), label: 'Mark'),
-          BottomNavigationBarItem(icon: Icon(Icons.network_check, color: Colors.black), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.person, color: Colors.black), label: 'Profile'),
-        ],
-      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const ScrollPhysics(),
