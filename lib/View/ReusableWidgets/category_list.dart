@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
@@ -14,8 +15,8 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  // final format = DateFormat('MMMM dd, yyyy');
-  String categoryName = 'technology';
+
+  String categoryName = 'general';
 
   List<String> categoryList = [
     'general',
@@ -80,6 +81,7 @@ class _CategoryListState extends State<CategoryList> {
                     shrinkWrap: true,
                       itemCount: snapshot.data!.articles!.length,
                       itemBuilder: (context, index){
+                        DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                         return InkWell(
                           onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
                             title: snapshot.data!.articles![index].title.toString(),
@@ -95,7 +97,7 @@ class _CategoryListState extends State<CategoryList> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                     image: NetworkImage(snapshot.data!.articles![index].urlToImage.toString())
                                   )
                                 ),
@@ -111,9 +113,11 @@ class _CategoryListState extends State<CategoryList> {
                                         fontSize: 15
                                       ),),
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(snapshot.data!.articles![index].source!.name.toString()),
-                                          const Text(' Feb, 28 2023')
+                                          Text(formatDate(dateTime, [yyyy, '-', mm, '-', dd]))
+
                                         ],
                                       )
                                     ],

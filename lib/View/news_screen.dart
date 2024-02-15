@@ -12,6 +12,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
 
+
   String categoryName = 'general';
 
   List<String> categoryList = [
@@ -31,6 +32,8 @@ class _NewsScreenState extends State<NewsScreen> {
       key: _globalKey,
       drawer: const Drawer(),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
+        unselectedLabelStyle: const TextStyle(color: Colors.black),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled, color: Colors.black,), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.bookmarks_rounded, color: Colors.black), label: 'Mark'),

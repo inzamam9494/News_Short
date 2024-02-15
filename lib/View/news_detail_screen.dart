@@ -48,7 +48,9 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
         title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: BackIcon(
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             )),
         actions: [
           Padding(
@@ -73,18 +75,33 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             width: MediaQuery.of(context).size.width * 1,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(widget.urlToImage), fit: BoxFit.fitHeight),
+                    image: NetworkImage(widget.urlToImage), fit: BoxFit.cover),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30))),
           ),
           Row(children: [
-            Text(
-              widget.name,
-              textAlign: TextAlign.start,
-              style: TextStyle(),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                widget.name,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
             ),
-          ])
+          ]),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+             widget.content,
+              style: const TextStyle(
+                fontSize: 18
+              ),
+            ),
+          )
         ],
       ),
     );

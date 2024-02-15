@@ -37,61 +37,68 @@ class _SlideShowState extends State<SlideShow> {
                 return CarouselSlider.builder(
                     itemCount: 5,
                     itemBuilder: (context, index, realIndex) {
-                      return Container(
-                        child: Card(
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.network(
-                                  snapshot.data!.articles![index].urlToImage
-                                      .toString(),
-                                  fit: BoxFit.fill,
-                                  height: double.infinity,
+                      return InkWell(
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+                            title: snapshot.data!.articles![index].title.toString(),
+                            name: snapshot.data!.articles![index].source!.name.toString(),
+                            urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
+                            content: snapshot.data!.articles![index].content.toString()))),
+                        child: Container(
+                          child: Card(
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    snapshot.data!.articles![index].urlToImage
+                                        .toString(),
+                                    fit: BoxFit.fill,
+                                    height: double.infinity,
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                  left: 0,
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                        gradient: LinearGradient(
-                                            begin:
-                                                AlignmentDirectional.topCenter,
-                                            end: AlignmentDirectional
-                                                .bottomCenter,
-                                            colors: [
-                                          Colors.black12.withOpacity(0),
-                                          Colors.black.withOpacity(1)
-                                        ])),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Column(
-                                          children: [
-                                        Row(
-                                           mainAxisAlignment: MainAxisAlignment.start,
+                                Positioned(
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                          gradient: LinearGradient(
+                                              begin:
+                                                  AlignmentDirectional.topCenter,
+                                              end: AlignmentDirectional
+                                                  .bottomCenter,
+                                              colors: [
+                                            Colors.black12.withOpacity(0),
+                                            Colors.black.withOpacity(1)
+                                          ])),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
                                             children: [
+                                          Row(
+                                             mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                            Text(
+                                              snapshot.data!.articles![index]
+                                                  .source!.name
+                                                  .toString(),
+                                              style: const TextStyle(color: Colors.white,
+                                              fontSize: 12),
+                                            ),
+                                          ]),
                                           Text(
-                                            snapshot.data!.articles![index]
-                                                .source!.name
+                                            snapshot.data!.articles![index].title
                                                 .toString(),
                                             style: const TextStyle(color: Colors.white,
-                                            fontSize: 12),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400),
                                           ),
                                         ]),
-                                        Text(
-                                          snapshot.data!.articles![index].title
-                                              .toString(),
-                                          style: const TextStyle(color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                        ),
-                                      ]),
-                                    ),
-                                  ))
-                            ],
+                                      ),
+                                    ))
+                              ],
+                            ),
                           ),
                         ),
                       );
