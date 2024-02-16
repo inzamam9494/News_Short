@@ -37,11 +37,14 @@ class _SlideShowState extends State<SlideShow> {
                 return CarouselSlider.builder(
                     itemCount: 5,
                     itemBuilder: (context, index, realIndex) {
+                      DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                       return InkWell(
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
+                            dateTime: snapshot.data!.articles![index].publishedAt.toString(),
+                            share: snapshot.data!.articles![index].url.toString(),
                             content: snapshot.data!.articles![index].content.toString()))),
                         child: Container(
                           child: Card(

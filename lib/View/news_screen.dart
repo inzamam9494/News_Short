@@ -53,7 +53,7 @@ class _NewsScreenState extends State<NewsScreen> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ReusableText(text: 'Breaking News'),
             SlideShow(),
-            CategoryList()
+            const CategoryList()
           ],
         ),
       ),

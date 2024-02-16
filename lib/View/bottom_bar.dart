@@ -35,10 +35,10 @@ class _BottomBarState extends State<BottomBar> {
             indicatorColor: Colors.transparent
         ),
         child: NavigationBar(
-          height: 75,
-          backgroundColor: Colors.transparent,
+          height: 65,
+          backgroundColor: Colors.white,
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          animationDuration: const Duration(seconds: 3),
+          animationDuration: const Duration(seconds: 1),
           selectedIndex: index,
           onDestinationSelected: (index) => setState(() => this.index = index),
           destinations: [

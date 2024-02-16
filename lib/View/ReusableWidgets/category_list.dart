@@ -87,7 +87,9 @@ class _CategoryListState extends State<CategoryList> {
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
-                            content: snapshot.data!.articles![index].content.toString()))),
+                            content: snapshot.data!.articles![index].content.toString(),
+                          dateTime: snapshot.data!.articles![index].publishedAt.toString(),
+                          share: snapshot.data!.articles![index].url.toString(),))),
                           child: Row(
                             children: [
                               Container(

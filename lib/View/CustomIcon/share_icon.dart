@@ -23,7 +23,7 @@ class _ShareIconState extends State<ShareIcon> {
             borderRadius: BorderRadius.circular(25)
         ),
         child: Padding(
-            padding: EdgeInsets.all(9),
+            padding: const EdgeInsets.all(9),
             child: Image.asset('images/icons/share.png')),
       ),
     );
