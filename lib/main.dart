@@ -4,6 +4,8 @@ import 'package:news_short/View/home.dart';
 import 'package:news_short/View/news_detail_screen.dart';
 import 'package:news_short/View/news_screen.dart';
 
+List<Map<String, dynamic>> bookMarks = [];
+
 void main() {
   runApp(const MyApp());
 }

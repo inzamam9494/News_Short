@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/v4.dart';
 
 import '../../Model/news_category.dart';
 import '../news_detail_screen.dart';
@@ -77,6 +79,7 @@ class _CategoryListState extends State<CategoryList> {
                 if(!snapshot.hasData){
                   return const Text('Loading..');
                 } else{
+                  var uuid = Uuid();
                   return ListView.builder(
                     shrinkWrap: true,
                       itemCount: snapshot.data!.articles!.length,
@@ -84,6 +87,7 @@ class _CategoryListState extends State<CategoryList> {
                         DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                         return InkWell(
                           onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+                            id: uuid.v4(),
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),

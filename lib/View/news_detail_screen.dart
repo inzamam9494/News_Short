@@ -1,13 +1,16 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/CustomIcon/bookmark_icon.dart';
 import 'package:news_short/View/CustomIcon/share_icon.dart';
+import 'package:news_short/View/ReusableWidgets/category_list.dart';
+import 'package:news_short/main.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'CustomIcon/back_icon.dart';
 
 class NewsDetailScreen extends StatefulWidget {
-  String title, name, urlToImage, content, dateTime, share;
+  String title, name, urlToImage, content, dateTime, share, id;
 
   NewsDetailScreen(
       {super.key,
@@ -16,15 +19,28 @@ class NewsDetailScreen extends StatefulWidget {
       required this.urlToImage,
       required this.content,
       required this.dateTime,
-      required this.share});
+      required this.share,
+        required  this.id});
 
   @override
   State<NewsDetailScreen> createState() => _NewsDetailScreenState();
 }
 
 class _NewsDetailScreenState extends State<NewsDetailScreen> {
+
+  StateService stateService = StateService();
+  late bool isBookmarked = bookMarks.any((element) => element['id'] == widget.id);
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   isBookmarked = bookMarks.any((element) => element['id'] == widget.id);
+  // }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -44,7 +60,31 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
               children: [
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: BookMarkIcon(onTap: () {})),
+
+                    child: BookMarkIcon(
+                        isBookmarked: isBookmarked,
+                        onTap: () {
+                     if (bookMarks.every((element) => element['id'] != widget.id)) {
+                       setState(() {
+                         isBookmarked = true;
+                       });
+                       bookMarks.add({
+                         "id": widget.id,
+                         "name": widget.name,
+                         "title": widget.title,
+                         "urlToImage": widget.urlToImage,
+                         "date": widget.dateTime,
+                         "content": widget.content,
+                         "share": widget.share,
+                       });
+                     }else{
+                       setState(() {
+                         isBookmarked = false;
+                       });
+                       bookMarks.removeWhere((element) => element['id'] == widget.id);
+                     }
+                    })),
+
                 ShareIcon(
                   onTap: () => Share.share(widget.share),
                 )

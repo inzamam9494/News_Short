@@ -5,6 +5,7 @@ import 'package:news_short/Model/model.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/news_detail_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:uuid/uuid.dart';
 
 const newsIconColor = Color(0xffc1c1cf);
 
@@ -34,12 +35,14 @@ class _SlideShowState extends State<SlideShow> {
               if (!snapshot.hasData) {
                 return const Text('Loading..');
               } else {
+                var uuid = Uuid();
                 return CarouselSlider.builder(
                     itemCount: 5,
                     itemBuilder: (context, index, realIndex) {
                       DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                       return InkWell(
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+                          id: uuid.v4(),
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
