@@ -20,17 +20,16 @@ class NewsDetailScreen extends StatefulWidget {
       required this.content,
       required this.dateTime,
       required this.share,
-        required  this.id});
+      required this.id});
 
   @override
   State<NewsDetailScreen> createState() => _NewsDetailScreenState();
 }
 
 class _NewsDetailScreenState extends State<NewsDetailScreen> {
-
   StateService stateService = StateService();
-  late bool isBookmarked = bookMarks.any((element) => element['id'] == widget.id);
-
+  late bool isBookmarked =
+      bookMarks.any((element) => element['id'] == widget.id);
 
   // @override
   // void initState() {
@@ -40,7 +39,6 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -60,31 +58,31 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
               children: [
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-
                     child: BookMarkIcon(
                         isBookmarked: isBookmarked,
                         onTap: () {
-                     if (bookMarks.every((element) => element['id'] != widget.id)) {
-                       setState(() {
-                         isBookmarked = true;
-                       });
-                       bookMarks.add({
-                         "id": widget.id,
-                         "name": widget.name,
-                         "title": widget.title,
-                         "urlToImage": widget.urlToImage,
-                         "date": widget.dateTime,
-                         "content": widget.content,
-                         "share": widget.share,
-                       });
-                     }else{
-                       setState(() {
-                         isBookmarked = false;
-                       });
-                       bookMarks.removeWhere((element) => element['id'] == widget.id);
-                     }
-                    })),
-
+                          if (bookMarks
+                              .every((element) => element['id'] != widget.id)) {
+                            setState(() {
+                              isBookmarked = true;
+                            });
+                            bookMarks.add({
+                              "id": widget.id,
+                              "name": widget.name,
+                              "title": widget.title,
+                              "urlToImage": widget.urlToImage,
+                              "date": widget.dateTime,
+                              "content": widget.content,
+                              "share": widget.share,
+                            });
+                          } else {
+                            setState(() {
+                              isBookmarked = false;
+                            });
+                            bookMarks.removeWhere(
+                                (element) => element['id'] == widget.id);
+                          }
+                        })),
                 ShareIcon(
                   onTap: () => Share.share(widget.share),
                 )
@@ -128,27 +126,27 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                     child: Column(children: [
                       Text(
                         widget.title,
-                        style:
-                            const TextStyle(color: Colors.white,
-                                fontSize: 30,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
                             fontWeight: FontWeight.w800),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: Text(
-                            formatDate(DateTime.parse(widget.dateTime),
-                                [yyyy, '-', mm, '-', dd]),
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ]),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                formatDate(DateTime.parse(widget.dateTime),
+                                    [yyyy, '-', mm, '-', dd]),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ]),
                     ]),
                   ),
                 ))
