@@ -86,7 +86,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                               return InkWell(
                                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ExploreNewsView(
-                                    url: snapshot.data!.articles![index].url.toString()
+                                    url: snapshot.data!.articles![index].url.toString(),
+                                  name: snapshot.data!.articles![index].source!.name.toString(),
                                 ))),
                                 child: Row(
                                   children: [
