@@ -18,7 +18,10 @@ class _ExploreNewsViewState extends State<ExploreNewsView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.name),
+        title: Text(widget.name,
+        style: const TextStyle(
+          fontWeight: FontWeight.w800
+        ),),
       ),
       body: WebView(
         initialUrl:  Uri.encodeFull(widget.url),
