@@ -79,6 +79,8 @@ flutter:
   - images/icons/save.png
   - images/icons/user.png
   - images/icons/web.png
+  - images/icons/facebook.png
+  - images/icons/google.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_short/Authentication/login_page.dart';
 import 'package:news_short/View/profile_screen.dart';
 import 'CustomIcon/explore_icon.dart';
 import 'CustomIcon/home_icon.dart';
@@ -23,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
     NewsScreen(),
     BookmarkScreen(),
     ExploreScreen(),
-    ProfileScreen()
+    LoginPage()
   ];
 
 
