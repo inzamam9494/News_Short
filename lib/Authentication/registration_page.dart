@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:news_short/Authentication/components/my_text_field.dart';
 import 'package:news_short/Authentication/components/my_button.dart';
 import 'package:news_short/Authentication/components/square_tile.dart';
-import 'package:news_short/Authentication/registration_page.dart';
+import 'package:news_short/Authentication/login_page.dart';
 import 'package:news_short/Authentication/services/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,14 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
+                MyTextField(
+                  controller: confirmPasswordController,
+                  hintText: 'Confirm Password',
+                  obscureText: true,
+                ),
+
+                const SizedBox(height: 10),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -74,12 +83,12 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
 
                 MyButton(onTap: (){},
-                Mytext: 'Sign In'),
+                Mytext: 'Sign Up',),
 
                 const SizedBox(height: 50),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     children: [
                       Expanded(
@@ -90,11 +99,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       Padding(
-                        padding:const  EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text('or continue with',
-                        style: TextStyle(
-                          color: Colors.grey[700]
-                        ),),
+                          style: TextStyle(
+                              color: Colors.grey[700]
+                          ),),
                       ),
 
                       Expanded(
@@ -127,20 +136,20 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Not a member?',
-                    style: TextStyle(
-                      color: Colors.grey[700]
-                    ),),
+                      style: TextStyle(
+                          color: Colors.grey[700]
+                      ),),
                     const SizedBox(width: 6,),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                       },
-                      child: const Text('Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                      child: const Text('Login now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
 
-                      ),),
+                        ),),
                     )
                   ],
                 ),

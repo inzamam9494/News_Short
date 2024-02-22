@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "815722667265",
+    "project_id": "newsapp-de375",
+    "storage_bucket": "newsapp-de375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815722667265:android:83d08a87f0ff82fca20f00",
+        "android_client_info": {
+          "package_name": "com.inzziyon.news_short"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtuMPshGEHbH9UV_UIed4hZe_H8g3uF3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

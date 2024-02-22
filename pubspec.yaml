@@ -44,6 +44,9 @@ dependencies:
   dio:
   webview_flutter: ^3.0.4
   url_launcher: ^6.0.9
+  google_sign_in:
+  firebase_auth:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
