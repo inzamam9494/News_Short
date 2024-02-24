@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:news_short/Authentication/auth_page.dart';
 import 'package:news_short/SampleCheking.dart';
 import 'package:news_short/View/home.dart';
 import 'package:news_short/View/news_detail_screen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen()
+      home: AuthPage()
     );
   }
 }
