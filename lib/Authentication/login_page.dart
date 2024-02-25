@@ -136,7 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () => AuthService().signInWithGoogle(),
                         imagePath: 'images/icons/google.png'),
                     SquareTile(
-                        onTap: () {}, imagePath: 'images/icons/facebook.png'),
+                        onTap: () => AuthService().signInWithFacebook(),
+                        imagePath: 'images/icons/facebook.png'),
                   ],
                 ),
                 const SizedBox(height: 50),

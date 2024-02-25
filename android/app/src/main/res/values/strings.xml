@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">800552915447103</string>
+    <string name="fb_login_protocol_scheme">fb800552915447103</string>
+    <string name="facebook_client_token">2cf2da575cf545f035ca767bb8ad1720</string>
+    <string name="app_name">"News_Short"</string>
+
+</resources>
+
+

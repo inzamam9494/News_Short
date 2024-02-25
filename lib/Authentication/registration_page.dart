@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/Authentication/components/my_text_field.dart';
 import 'package:news_short/Authentication/components/my_button.dart';
@@ -13,9 +14,49 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  void signUpUser() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      if(passwordController.text == confirmPasswordController){
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text);
+      } else{
+        showErrorMessage("Password Don't match!");
+      }
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'user-not-found') {
+        showErrorMessage(e.code);
+
+      } else if (e.code == 'wrong-password') {
+        showErrorMessage(e.code);
+
+      }
+    }
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(message),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +79,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 50),
 
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'Let\'s create a account for you!',
                   style: TextStyle(color: Colors.grey[700], fontSize: 16),
                 ),
 
                 const SizedBox(height: 25),
 
                 MyTextField(
-                  controller: usernameController,
+                  controller: emailController,
                   hintText: 'Username',
                   obscureText: false,
                 ),
@@ -68,21 +109,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 10),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forget Password?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      )
-                    ],
-                  ),
-                ),
+
                 const SizedBox(height: 25),
 
-                MyButton(onTap: (){},
+                MyButton(onTap: signUpUser,
                 Mytext: 'Sign Up',),
 
                 const SizedBox(height: 50),
