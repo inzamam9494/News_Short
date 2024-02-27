@@ -52,10 +52,10 @@ class _CategoryListState extends State<CategoryList> {
                           setState(() {});
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 12),
+                          padding: const EdgeInsets.only(right: 15),
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.04,
-                            width: MediaQuery.of(context).size.width * 0.18,
+                            height: MediaQuery.of(context).size.height * 0.10,
+                            width: MediaQuery.of(context).size.width * 0.30,
                             decoration: BoxDecoration(
                                 color: categoryName == categoryList[index] ? Colors.black : newsIconColor,
                                 borderRadius: BorderRadius.circular(20)
