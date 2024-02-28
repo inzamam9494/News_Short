@@ -63,7 +63,7 @@ class _CategoryListState extends State<CategoryList> {
                             child: Center(child: Text(categoryList[index].toString(),
                               style: TextStyle(
                                 fontSize: 10,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: categoryName == categoryList[index] ? Colors.white : Colors.black,
                               ),)),
                           ),
