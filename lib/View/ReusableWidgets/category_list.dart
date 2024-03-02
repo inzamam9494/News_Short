@@ -52,7 +52,7 @@ class _CategoryListState extends State<CategoryList> {
                           setState(() {});
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 15),
+                          padding: const EdgeInsets.only(right: 16),
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.10,
                             width: MediaQuery.of(context).size.width * 0.30,
