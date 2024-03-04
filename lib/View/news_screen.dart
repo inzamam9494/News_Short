@@ -47,7 +47,6 @@ class _NewsScreenState extends State<NewsScreen> {
                 onTapMenu: (){
                   _globalKey.currentState!.openDrawer();
                 },
-                onTapSearch: (){},
                 onTapBell: (){},
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),

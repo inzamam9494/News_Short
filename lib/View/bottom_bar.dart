@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
     NewsScreen(),
     BookmarkScreen(),
     ExploreScreen(),
-    LoginPage()
+    ProfileScreen()
   ];
 
 

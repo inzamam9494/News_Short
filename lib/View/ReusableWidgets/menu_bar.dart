@@ -7,11 +7,9 @@ import '../CustomIcon/bell_icon.dart';
 
 class MenuBarWidget extends StatelessWidget {
   final GestureTapCallback onTapMenu;
-  final GestureTapCallback onTapSearch;
   final GestureTapCallback onTapBell;
-   MenuBarWidget({super.key,
+   const MenuBarWidget({super.key,
     required this.onTapMenu,
-    required this.onTapSearch,
     required this.onTapBell,
   });
 
@@ -25,7 +23,6 @@ class MenuBarWidget extends StatelessWidget {
           MenuIcon(onTap: onTapMenu),
           Row(
             children: [
-              SearchIcon(onTap: onTapSearch),
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
               BellIcon(onTap: onTapBell)
             ],
