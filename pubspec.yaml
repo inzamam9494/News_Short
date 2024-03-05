@@ -48,6 +48,8 @@ dependencies:
   firebase_auth:
   firebase_core:
   flutter_facebook_auth: ^6.1.1
+  image_picker: ^1.0.7
+  get: ^4.6.6
 
 
 dev_dependencies:
