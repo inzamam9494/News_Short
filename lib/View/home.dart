@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/View/bottom_bar.dart';
-import 'package:news_short/View/news_screen.dart';
 
 const source = "https://source.unsplash.com/random";
 
@@ -14,19 +12,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  void signUserOut(){
-    FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: signUserOut,
-              icon: Icon(Icons.logout))
-        ],
-      ),
       body: Stack(
           children: [
         Container(

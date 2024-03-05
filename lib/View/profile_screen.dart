@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,8 +15,13 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
+  final user = FirebaseAuth.instance.currentUser;
   final ImagePicker _picker = ImagePicker();
   File? pickedImage;
+
+  void signUserOut(){
+    FirebaseAuth.instance.signOut();
+  }
 
   void imagePickerOption() {
     Get.bottomSheet(
@@ -118,15 +124,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   child: ClipOval(
-                    child: pickedImage !=null ? Image.file(pickedImage!):
+                    child: pickedImage !=null ? Image.file(pickedImage!,
+                    width: 170,
+                    height: 170,
+                    fit: BoxFit.cover,):
                     Image.network(
                       'https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg',
                       width: 170,
                       height: 170,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                
                 Positioned(
                   bottom: 0,
                   right: 5,
@@ -146,12 +156,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 20,
           ),
           Padding(
+            padding: const EdgeInsets.all(10),
+              child: Center(child: Text(user!.email.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 20
+              ),))),
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton.icon(
                 onPressed: imagePickerOption,
                 icon: const Icon(Icons.add_a_photo_sharp),
                 label: const Text('UPLOAD IMAGE')),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton.icon(
+                onPressed: signUserOut,
+                icon: const Icon(Icons.login),
+                label: const Text('LOG OUT')),
+          ),
         ],
       ),
     );
