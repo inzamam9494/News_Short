@@ -10,6 +10,8 @@ import 'package:news_short/View/bookmark_screen.dart';
 import 'package:news_short/View/explore_screen.dart';
 import 'package:news_short/View/profile_screen.dart';
 
+import '../Gemini/chat_screen.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -36,7 +38,11 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: TextButton(
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen())),
+            child: const Text("Gemini Model"))
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const ScrollPhysics(),
