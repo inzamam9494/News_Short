@@ -10,7 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import 'CustomIcon/back_icon.dart';
 
 class NewsDetailScreen extends StatefulWidget {
-  String title, name, urlToImage, content, dateTime, share, id;
+  String title, name, urlToImage, content, dateTime, share, id, source;
 
   NewsDetailScreen(
       {super.key,
@@ -20,7 +20,8 @@ class NewsDetailScreen extends StatefulWidget {
       required this.content,
       required this.dateTime,
       required this.share,
-      required this.id});
+      required this.id,
+      required this.source});
 
   @override
   State<NewsDetailScreen> createState() => _NewsDetailScreenState();
@@ -74,6 +75,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                               "date": widget.dateTime,
                               "content": widget.content,
                               "share": widget.share,
+                              "source": widget.source,
                             });
                           } else {
                             setState(() {

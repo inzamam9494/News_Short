@@ -1,6 +1,7 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/explore_news_view.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
 import '../Model/news_category.dart';
@@ -54,8 +55,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 12),
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.04,
-                              width: MediaQuery.of(context).size.width * 0.18,
+                              height: MediaQuery.of(context).size.height * 0.10,
+                              width: MediaQuery.of(context).size.width * 0.30,
                               decoration: BoxDecoration(
                                   color: categoryName == categoryList[index] ? Colors.black : newsIconColor,
                                   borderRadius: BorderRadius.circular(20)
@@ -71,67 +72,102 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         );
                       }),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.50,
-                  child: FutureBuilder(
-                      future: stateService.fetchNewsCategoryApi(categoryName),
-                      builder: (context, AsyncSnapshot<NewsCategory>snapshot){
-                        if(!snapshot.hasData){
-                          return const Text('Loading..');
-                        } else{
-                          var uuid = Uuid();
-                          return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.articles!.length,
-                              itemBuilder: (context, index){
-                                DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
-                                return InkWell(
-                                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ExploreNewsView(
-                                      url: snapshot.data!.articles![index].url.toString(),
-                                    name: snapshot.data!.articles![index].source!.name.toString(),
-                                  ))),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.all(10),
-                                        height: MediaQuery.of(context).size.height * 0.08,
-                                        width: MediaQuery.of(context).size.width * 0.25,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(snapshot.data!.articles![index].urlToImage.toString())
-                                            )
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                          child: Column(
-                                            children: [
-                                              Text(snapshot.data!.articles![index].title.toString(),
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 15
-                                                ),),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(snapshot.data!.articles![index].source!.name.toString()),
-                                                  Text(formatDate(dateTime, [yyyy, '-', mm, '-', dd]))
-        
-                                                ],
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.90,
+                    child: FutureBuilder(
+                        future: stateService.fetchNewsCategoryApi(categoryName),
+                        builder: (context, AsyncSnapshot<NewsCategory>snapshot){
+                          if(!snapshot.hasData){
+                            return ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: 10,
+                                itemBuilder: (context, index){
+                                  return Shimmer.fromColors(
+                                      baseColor: Colors.grey.withOpacity(0.25),
+                                      highlightColor: Colors.white.withOpacity(0.6),
+                                      child: Column(
+                                        children: [
+                                          ListTile(
+                                            title: Container(height: 10, width: 89, color: Colors.white),
+                                            subtitle: Container(height: 10, width: 89, color: Colors.white),
+                                          ),
+                                        ],
+                                      )
+                                  );
+                                });
+                          } else{
+                            var uuid = Uuid();
+                            return ListView.builder(
+                              scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.articles!.length,
+                                itemBuilder: (context, index){
+                                  DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+                                  return InkWell(
+                                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ExploreNewsView(
+                                        url: snapshot.data!.articles![index].url.toString(),
+                                      name: snapshot.data!.articles![index].source!.name.toString(),
+                                    ))),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.all(10),
+                                          height: MediaQuery.of(context).size.height * 0.15,
+                                          width: MediaQuery.of(context).size.width * 0.35,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(snapshot.data!.articles![index].urlToImage.toString())
                                               )
-                                            ],
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              });
-                        }
-                      }),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                                            child: Column(
+                                              children: [
+                                                Text(snapshot.data!.articles![index].title.toString(),
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 15
+                                                  ),),
+                                                SizedBox(height: MediaQuery.of(context).size.height * 0.02,),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(snapshot.data!.articles![index].source!.name.toString(),
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight.w600,
+                                                          color: Colors.grey[500]
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(formatDate(dateTime, [MM,' ', dd, ',', yyyy]),
+                                                        style: TextStyle(
+                                                            fontWeight: FontWeight.w600,
+                                                            color: Colors.grey[500]
+                                                        ),),
+                                                    )
+
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          }
+                        }),
+                  ),
                 ),
               ]
           ),

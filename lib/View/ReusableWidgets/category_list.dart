@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/ReusableWidgets/slide_show.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/v4.dart';
 
@@ -77,7 +78,25 @@ class _CategoryListState extends State<CategoryList> {
               future: stateService.fetchNewsCategoryApi(categoryName),
               builder: (context, AsyncSnapshot<NewsCategory>snapshot){
                 if(!snapshot.hasData){
-                  return const Text('Loading..');
+                  return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index){
+                        return Shimmer.fromColors(
+                            baseColor: Colors.grey.withOpacity(0.25),
+                            highlightColor: Colors.white.withOpacity(0.6),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                title: Container(height: 10, width: 89, color: Colors.white),
+                                subtitle: Container(height: 10, width: 89, color: Colors.white),
+                              ),
+                              ],
+                            )
+                        );
+                      });
                 } else{
                   var uuid = Uuid();
                   return ListView.builder(
@@ -88,6 +107,7 @@ class _CategoryListState extends State<CategoryList> {
                         return InkWell(
                           onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
                             id: uuid.v4(),
+                              source: snapshot.data!.articles![index].source.toString(),
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
@@ -98,8 +118,8 @@ class _CategoryListState extends State<CategoryList> {
                             children: [
                               Container(
                                 margin: const EdgeInsets.all(10),
-                                height: MediaQuery.of(context).size.height * 0.08,
-                                width: MediaQuery.of(context).size.width * 0.25,
+                                height: MediaQuery.of(context).size.height * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.35,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
@@ -121,8 +141,21 @@ class _CategoryListState extends State<CategoryList> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(snapshot.data!.articles![index].source!.name.toString()),
-                                          Text(formatDate(dateTime, [yyyy, '-', mm, '-', dd]))
+                                          Expanded(
+                                            child: Text(snapshot.data!.articles![index].source!.name.toString(),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.grey[500]
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(formatDate(dateTime, [MM,' ', dd, ',', yyyy]),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.grey[500]
+                                              ),),
+                                          )
 
                                         ],
                                       )

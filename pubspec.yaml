@@ -50,6 +50,7 @@ dependencies:
   flutter_facebook_auth: ^6.1.1
   image_picker: ^1.0.7
   get: ^4.6.6
+  shimmer: ^3.0.0
 
 
 dev_dependencies:
@@ -81,6 +82,7 @@ flutter:
   - images/icons/search.png
   - images/icons/back.png
   - images/icons/bookmark.png
+  - images/icons/bookmark2.png
   - images/icons/share.png
   - images/icons/home.png
   - images/icons/save.png

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:news_short/Model/model.dart';
 import 'package:news_short/Services/utilities/state_services.dart';
 import 'package:news_short/View/news_detail_screen.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:uuid/uuid.dart';
 
@@ -33,7 +34,21 @@ class _SlideShowState extends State<SlideShow> {
             future: stateService.fetchNewsArticles(),
             builder: (context, AsyncSnapshot<NewsQueryModel> snapshot) {
               if (!snapshot.hasData) {
-                return const Text('Loading..');
+                return Center(
+                  child: Shimmer.fromColors(
+                      baseColor: Colors.grey.withOpacity(0.25),
+                      highlightColor: Colors.white.withOpacity(0.6),
+                    child: Card(
+                      child: Container(
+                        height: 200,
+                        width: 350,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               } else {
                 var uuid = Uuid();
                 return CarouselSlider.builder(
@@ -43,6 +58,7 @@ class _SlideShowState extends State<SlideShow> {
                       return InkWell(
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
                           id: uuid.v4(),
+                            source: snapshot.data!.articles![index].source.toString(),
                             title: snapshot.data!.articles![index].title.toString(),
                             name: snapshot.data!.articles![index].source!.name.toString(),
                             urlToImage: snapshot.data!.articles![index].urlToImage.toString(),
@@ -50,6 +66,7 @@ class _SlideShowState extends State<SlideShow> {
                             share: snapshot.data!.articles![index].url.toString(),
                             content: snapshot.data!.articles![index].content.toString()))),
                         child: Container(
+                          // width: double.infinity,
                           child: Card(
                             child: Stack(
                               children: [
@@ -94,8 +111,7 @@ class _SlideShowState extends State<SlideShow> {
                                             ),
                                           ]),
                                           Text(
-                                            snapshot.data!.articles![index].title
-                                                .toString(),
+                                            snapshot.data!.articles![index].title.toString(),
                                             style: const TextStyle(color: Colors.white,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400),

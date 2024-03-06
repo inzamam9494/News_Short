@@ -24,6 +24,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
           itemBuilder: (context, index){
           return InkWell(
             onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+              source: bookMarks[index]['source'],
               id: bookMarks[index]['id'],
               title: bookMarks[index]['title'],
               name: bookMarks[index]['name'],
@@ -35,8 +36,8 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.35,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -55,12 +56,27 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                               fontWeight: FontWeight.w600,
                               fontSize: 15
                           ),),
+
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.02,),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(bookMarks[index]['date']),
-                            Text(formatDate(DateTime.parse(bookMarks[index]['date']),
-                                [yyyy, '-', mm, '-', dd]),)
+                            Expanded(
+                              child: Text(bookMarks[index]['source'],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey[500]
+                                ),),
+                            ),
+                            Expanded(
+                              child: Text(formatDate(DateTime.parse(bookMarks[index]['date']),
+                                  [MM,' ', dd, ',', yyyy]),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey[500]
+                                ),),
+                            )
 
                           ],
                         )
