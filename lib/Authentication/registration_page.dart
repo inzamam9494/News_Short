@@ -7,7 +7,8 @@ import 'package:news_short/Authentication/login_page.dart';
 import 'package:news_short/Authentication/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final Function()? onTap;
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -22,30 +23,25 @@ class _RegisterPageState extends State<RegisterPage> {
     showDialog(
         context: context,
         builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
 
-    try {
-      if(passwordController.text == confirmPasswordController){
+    try{
+      if(passwordController.text == confirmPasswordController.text){
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text,
             password: passwordController.text);
-      } else{
-        showErrorMessage("Password Don't match!");
+      }else{
+        showErrorMessage("Password don't match");
       }
       Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e){
       Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        showErrorMessage(e.code);
-
-      } else if (e.code == 'wrong-password') {
-        showErrorMessage(e.code);
-
-      }
+      showErrorMessage(e.code);
     }
+
   }
 
   void showErrorMessage(String message) {
@@ -171,9 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),),
                     const SizedBox(width: 6,),
                     InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                      },
+                      onTap: widget.onTap,
                       child: const Text('Login now',
                         style: TextStyle(
                           color: Colors.blue,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:news_short/Authentication/components/my_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,13 +15,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   final user = FirebaseAuth.instance.currentUser;
   final ImagePicker _picker = ImagePicker();
   File? pickedImage;
 
-  void signUserOut(){
+  void signUserOut() {
     FirebaseAuth.instance.signOut();
+    setState(() {
+      Get.back();
+    });
   }
 
   void imagePickerOption() {
@@ -33,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           child: Container(
             color: Colors.white,
-            height: 250,
+            height: 300,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -47,30 +50,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      pickImage(ImageSource.camera);
-                    },
-                    icon: const Icon(Icons.camera),
-                    label: const Text("CAMERA"),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      pickImage(ImageSource.gallery);
-                    },
-                    icon: const Icon(Icons.image),
-                    label: const Text("GALLERY"),
-                  ),
+                  MyButton(
+                      onTap: () {
+                        pickImage(ImageSource.camera);
+                      },
+                      Mytext: 'CAMERA'),
                   const SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(Icons.close),
-                    label: const Text("CANCEL"),
+                  MyButton(
+                      onTap: () {
+                        pickImage(ImageSource.gallery);
+                      },
+                      Mytext: 'GALLERY'),
+                  const SizedBox(
+                    height: 10,
                   ),
+              MyButton(
+                  onTap: () {
+                    Get.back();
+                  },
+                  Mytext: 'CANCEL'),
                 ],
               ),
             ),
@@ -95,16 +95,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Profile",
-        style: TextStyle(
-          fontWeight: FontWeight.w700
-        ),),
+        title: const Text(
+          "Profile",
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -118,25 +117,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.indigo, width: 5),
+                    border: Border.all(color: Colors.grey.shade500, width: 3),
                     borderRadius: const BorderRadius.all(
                       Radius.circular(100),
                     ),
                   ),
                   child: ClipOval(
-                    child: pickedImage !=null ? Image.file(pickedImage!,
-                    width: 170,
-                    height: 170,
-                    fit: BoxFit.cover,):
-                    Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg',
-                      width: 170,
-                      height: 170,
-                      fit: BoxFit.cover,
-                    ),
+                    child: pickedImage != null
+                        ? Image.file(
+                            pickedImage!,
+                            width: 170,
+                            height: 170,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'images/icons/user.png',
+                            width: 170,
+                            height: 170,
+                            fit: BoxFit.fill,
+                          ),
                   ),
                 ),
-                
                 Positioned(
                   bottom: 0,
                   right: 5,
@@ -144,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onPressed: imagePickerOption,
                     icon: const Icon(
                       Icons.add_a_photo_outlined,
-                      color: Colors.blue,
+                      color: Colors.black,
                       size: 30,
                     ),
                   ),
@@ -156,26 +157,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
-              child: Center(child: Text(user!.email.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20
-              ),))),
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                  child: Text(
+                user!.email.toString(),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              ))),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton.icon(
-                onPressed: imagePickerOption,
-                icon: const Icon(Icons.add_a_photo_sharp),
-                label: const Text('UPLOAD IMAGE')),
+            child: MyButton(
+              onTap: imagePickerOption,
+              Mytext: 'UPLOAD IMAGE',
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton.icon(
-                onPressed: signUserOut,
-                icon: const Icon(Icons.login),
-                label: const Text('LOG OUT')),
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: MyButton(
+                onTap: signUserOut,
+                Mytext: 'LOG OUT',
+              )),
         ],
       ),
     );

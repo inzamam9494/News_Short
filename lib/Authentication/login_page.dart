@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_short/Authentication/components/my_text_field.dart';
 import 'package:news_short/Authentication/components/my_button.dart';
 import 'package:news_short/Authentication/components/square_tile.dart';
@@ -9,7 +10,8 @@ import 'package:news_short/Authentication/registration_page.dart';
 import 'package:news_short/Authentication/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function()? onTap;
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
         context: context,
         builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -31,29 +33,20 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
       if (e.code == 'user-not-found') {
-          showErrorMessage(e.code);
-
+        showErrorMessage(e.code);
       } else if (e.code == 'wrong-password') {
-          showErrorMessage(e.code);
-
+        showErrorMessage(e.code);
       }
     }
   }
 
   void showErrorMessage(String message) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(message),
-          );
-        });
+    Fluttertoast.showToast(msg: message);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -152,12 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 6,
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterPage()));
-                      },
+                      onTap: widget.onTap,
                       child: const Text(
                         'Register now',
                         style: TextStyle(
