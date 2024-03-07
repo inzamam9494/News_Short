@@ -140,7 +140,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                               padding: EdgeInsets.symmetric(vertical: 5),
                               child: Text(
                                 formatDate(DateTime.parse(widget.dateTime),
-                                    [yyyy, '-', mm, '-', dd]),
+                                    [MM,' ', dd, ',', yyyy]),
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
                                     color: Colors.white,

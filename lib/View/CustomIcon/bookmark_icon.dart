@@ -18,10 +18,10 @@ class BookMarkIcon extends StatelessWidget {
         width: MediaQuery.of(context).size.height * .05,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(25)),
-        child: Padding(
-            padding: const EdgeInsets.all(9),
-            child: Icon((isBookmarked ? Icons.bookmark : Icons.bookmark_outline),
-              )),
+        child: Center(
+          child: Icon((isBookmarked ? Icons.bookmark : Icons.bookmark_outline),
+            ),
+        ),
       ),
     );
   }
