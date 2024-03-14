@@ -18,7 +18,7 @@ class BellIcon extends StatelessWidget {
             borderRadius: BorderRadius.circular(25)
         ),
         child: Padding(
-            padding: EdgeInsets.all(9),
+            padding: EdgeInsets.all(10),
             child: Image.asset('images/icons/alarm.png')),
       ),
     );
